@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "698296469962",
+    "project_id": "smart-reef-38911",
+    "storage_bucket": "smart-reef-38911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698296469962:android:6fdf8255969d0b2fdea733",
+        "android_client_info": {
+          "package_name": "com.example.smart_reef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698296469962-e7ar0mdktlob3uo4dbnev41vl76i04mi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSXSq5c_3y2trxi7yxYkYpE9nkN3aFHWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698296469962-e7ar0mdktlob3uo4dbnev41vl76i04mi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

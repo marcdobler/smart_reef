@@ -35,7 +35,7 @@ class _SignInState extends State<SignIn> {
             body: Stack(children: <Widget>[
               Container(
                 height: size.height - 180,
-                color: Colors.blue,
+                color: Theme.of(context).accentColor,
               ),
               AnimatedPositioned(
                 duration: Duration(milliseconds: 500),
@@ -97,12 +97,13 @@ class _SignInState extends State<SignIn> {
                         decoration: textInputDecoration.copyWith(
                           prefixIcon: Icon(
                             Icons.email_outlined,
-                            color: Colors.blue,
+                            color: Theme.of(context).accentColor,
                           ),
                           hintText: 'Email',
-                          hintStyle: TextStyle(color: Colors.blue),
+                          hintStyle:
+                              TextStyle(color: Theme.of(context).accentColor),
                         ),
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(color: Theme.of(context).accentColor),
                         validator: (val) =>
                             val.isEmpty ? 'Enter an email' : null,
                         keyboardType: TextInputType.emailAddress,
@@ -115,17 +116,18 @@ class _SignInState extends State<SignIn> {
                         decoration: textInputDecoration.copyWith(
                           prefixIcon: Icon(
                             Icons.lock_outline,
-                            color: Colors.blue,
+                            color: Theme.of(context).accentColor,
                           ),
                           suffixIcon: GestureDetector(
                             onTap: () {},
                             child: Icon(
                               Icons.visibility_off,
-                              color: Colors.blue,
+                              color: Theme.of(context).accentColor,
                             ),
                           ),
                           hintText: 'Password',
-                          hintStyle: TextStyle(color: Colors.blue),
+                          hintStyle:
+                              TextStyle(color: Theme.of(context).accentColor),
                         ),
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
@@ -142,7 +144,9 @@ class _SignInState extends State<SignIn> {
                         children: <Widget>[
                           Text(
                             'Forgot password?',
-                            style: TextStyle(fontSize: 14, color: Colors.blue),
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).accentColor),
                           )
                         ],
                       ),
@@ -152,9 +156,14 @@ class _SignInState extends State<SignIn> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 16),
+                              horizontal: 50,
+                              vertical: 16,
+                            ),
                             textStyle: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            primary: Theme.of(context).accentColor,
                           ),
                           child: Text('Login'),
                           onPressed: () async {
@@ -178,11 +187,15 @@ class _SignInState extends State<SignIn> {
                         width: double.infinity,
                         child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: Colors.blue, width: 2),
+                            primary: Theme.of(context).accentColor,
+                            side: BorderSide(
+                                color: Theme.of(context).accentColor, width: 2),
                             padding: EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 16),
                             textStyle: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           child: Text('Sign Up'),
                           onPressed: () {

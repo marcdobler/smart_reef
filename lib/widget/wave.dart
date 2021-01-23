@@ -29,8 +29,9 @@ class _WaveWidgetState extends State<WaveWidget> with TickerProviderStateMixin {
     super.initState();
 
     animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: widget.speed))
-      ..addListener(() {
+      vsync: this,
+      duration: Duration(milliseconds: widget.speed),
+    )..addListener(() {
         wavePoints.clear();
 
         final double waveSpeed = animationController.value * 1080;

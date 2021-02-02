@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smart_reef/services/auth.dart';
-import 'package:smart_reef/shared/constants.dart';
-import 'package:smart_reef/shared/loading.dart';
-import 'package:smart_reef/widget/wave.dart';
+import '../../services/auth.dart';
+import '../../shared/constants.dart';
+import '../../shared/loading.dart';
+import '../../widget/wave.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  const SignIn({this.toggleView});
 
   @override
   _SignInState createState() => _SignInState();
@@ -38,7 +38,7 @@ class _SignInState extends State<SignIn> {
                 color: Theme.of(context).accentColor,
               ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOutQuad,
                 top: keyboardOpen ? -size.height / 3.7 : 0.0,
                 child: WaveWidget(
@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOutQuad,
                 top: keyboardOpen ? -size.height / 3.7 : 0.0,
                 child: WaveWidget(
@@ -65,7 +65,7 @@ class _SignInState extends State<SignIn> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Column(children: <Widget>[
-                      Text(
+                      const Text(
                         'SMART REEF',
                         style: TextStyle(
                           color: Colors.white,
@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
                           fontWeight: FontWeight.w900,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Welcome back!',
                         style: TextStyle(
                           color: Colors.white70,
@@ -86,13 +86,13 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(
                           prefixIcon: Icon(
@@ -111,7 +111,7 @@ class _SignInState extends State<SignIn> {
                           setState(() => email = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(
                           prefixIcon: Icon(
@@ -138,7 +138,7 @@ class _SignInState extends State<SignIn> {
                           setState(() => password = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -150,26 +150,25 @@ class _SignInState extends State<SignIn> {
                           )
                         ],
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 50,
                               vertical: 16,
                             ),
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                             primary: Theme.of(context).accentColor,
                           ),
-                          child: Text('Login'),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               setState(() => loading = true);
-                              dynamic result = await _auth
+                              final dynamic result = await _auth
                                   .signInWithEmailAndPassword(email, password);
                               if (result == null) {
                                 setState(() {
@@ -180,9 +179,10 @@ class _SignInState extends State<SignIn> {
                               }
                             }
                           },
+                          child: const Text('Login'),
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton(
@@ -190,22 +190,22 @@ class _SignInState extends State<SignIn> {
                             primary: Theme.of(context).accentColor,
                             side: BorderSide(
                                 color: Theme.of(context).accentColor, width: 2),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 16),
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: Text('Sign Up'),
                           onPressed: () {
                             widget.toggleView();
                           },
+                          child: const Text('Sign Up'),
                         ),
                       ),
                       Text(
                         error,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.red,
                           fontSize: 14.0,
                         ),

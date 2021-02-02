@@ -5,7 +5,7 @@ class ClipperWidget extends CustomClipper<Path> {
   ClipperWidget({this.waveList});
 
   @override
-  getClip(Size size) {
+  Path getClip(Size size) {
     final Path path = Path();
     path.addPolygon(waveList, false);
     path.lineTo(size.width, size.height);

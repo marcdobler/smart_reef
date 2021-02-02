@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_reef/screens/authenticate/register.dart';
-import 'package:smart_reef/screens/authenticate/sign_in.dart';
+import 'register.dart';
+import 'sign_in.dart';
 
 class Authenticate extends StatefulWidget {
   @override

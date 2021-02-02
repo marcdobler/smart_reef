@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class Tank extends StatelessWidget {
   static String route = "tank";
 
-  final index;
+  final Future<int> index;
 
-  Tank({Key key, @required this.index}) : super(key: key);
+  const Tank({Key key, @required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,13 @@ class Tank extends StatelessWidget {
             child: SingleChildScrollView(
                 child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Hero(
             tag: "DemoTag$index",
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage("https://picsum.photos/250?image=9"),
@@ -53,16 +52,16 @@ class Tank extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: ElevatedButton(
-            child: Text(
-              "Back to Login",
-              style: TextStyle(color: Colors.white),
-            ),
             onPressed: () {
               Navigator.popUntil(
                 context,
                 (route) => route.isFirst,
               );
             },
+            child: const Text(
+              "Back to Login",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         )
       ],

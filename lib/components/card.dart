@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 Widget tankCardComponent(String title) {
-  return Scaffold();
+  return const Scaffold();
 }

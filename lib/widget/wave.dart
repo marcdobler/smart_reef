@@ -1,7 +1,7 @@
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:smart_reef/widget/clipper.dart';
+import 'clipper.dart';
 
 class WaveWidget extends StatefulWidget {
   final Size size;
@@ -9,7 +9,7 @@ class WaveWidget extends StatefulWidget {
   final Color color;
   final int speed;
 
-  WaveWidget({
+  const WaveWidget({
     this.size,
     this.yOffset,
     this.color,
@@ -35,13 +35,13 @@ class _WaveWidgetState extends State<WaveWidget> with TickerProviderStateMixin {
         wavePoints.clear();
 
         final double waveSpeed = animationController.value * 1080;
-        final double fullSphere = animationController.value * Math.pi * 2;
-        final double normalizer = Math.cos(fullSphere);
-        final double waveWidth = Math.pi / 270;
-        final double waveHeight = 20.0;
+        final double fullSphere = animationController.value * math.pi * 2;
+        final double normalizer = math.cos(fullSphere);
+        final double waveWidth = math.pi / 270;
+        const double waveHeight = 20.0;
 
         for (int i = 0; i <= widget.size.width.toInt(); ++i) {
-          double calc = Math.sin((waveSpeed - i) * waveWidth);
+          final double calc = math.sin((waveSpeed - i) * waveWidth);
           wavePoints.add(
             Offset(
               i.toDouble(), //X

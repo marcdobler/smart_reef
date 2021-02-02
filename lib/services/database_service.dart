@@ -1,22 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smart_reef/models/tank.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../models/tank.dart';
 
 // @TODO: Read https://firebase.flutter.dev/docs/firestore/usage to have less code to add Class manage small part of code
 
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
+
   // Collection reference
 
-  final CollectionReference tankCollection =
-      FirebaseFirestore.instance.collection('tanks');
+  final CollectionReference userDataCollection =
+      FirebaseFirestore.instance.collection('userData');
 
   Future updateUserData(
-      int width, int height, int lenght, String name, String type) async {
-    return await tankCollection.doc(uid).set({
+      int width, int height, int length, String name, String type) async {
+    // ignore: unnecessary_await_in_return
+    return await userDataCollection.doc(uid).collection('tanks').doc().set({
       'width': width,
       'height': height,
-      'lenght': lenght,
+      'length': length,
       'name': name,
       'type': type
     });
@@ -26,9 +29,10 @@ class DatabaseService {
   List<Tank> _tankListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Tank(
+        id: doc.reference.id,
         height: doc.data()['height'] ?? 0,
         width: doc.data()['width'] ?? 0,
-        lenght: doc.data()['lenght'] ?? 0,
+        length: doc.data()['length'] ?? 0,
         name: doc.data()['name'] ?? '',
         type: doc.data()['type'] ?? '',
       );
@@ -36,6 +40,12 @@ class DatabaseService {
   }
 
   Stream<List<Tank>> get tanks {
-    return tankCollection.snapshots().map(_tankListFromSnapshot);
+    final User user = FirebaseAuth.instance.currentUser;
+
+    return userDataCollection
+        .doc(user.uid)
+        .collection('tanks')
+        .snapshots()
+        .map(_tankListFromSnapshot);
   }
 }

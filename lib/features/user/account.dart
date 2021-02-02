@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_reef/components/appbar.dart';
+import '../../components/appbar.dart';
 
 class Account extends StatelessWidget {
   static String route = "account";
@@ -7,7 +7,7 @@ class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBarComponent(context, 'Account'),
+        appBar: const AppBarComponent(title: 'Account'),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -16,16 +16,16 @@ class Account extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                child: Text(
-                  "Back to Login",
-                  style: TextStyle(color: Colors.white),
-                ),
                 onPressed: () {
                   Navigator.popUntil(
                     context,
                     (route) => route.isFirst,
                   );
                 },
+                child: const Text(
+                  "Back to Login",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             )
           ],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smart_reef/services/auth.dart';
-import 'package:smart_reef/shared/constants.dart';
-import 'package:smart_reef/shared/loading.dart';
-import 'package:smart_reef/widget/wave.dart';
+import '../../services/auth.dart';
+import '../../shared/constants.dart';
+import '../../shared/loading.dart';
+import '../../widget/wave.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
-  Register({this.toggleView});
+  const Register({this.toggleView});
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -37,7 +37,7 @@ class _RegisterState extends State<Register> {
                 color: Colors.blue,
               ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOutQuad,
                 top: keyboardOpen ? -size.height / 3.7 : 0.0,
                 child: WaveWidget(
@@ -48,7 +48,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOutQuad,
                 top: keyboardOpen ? -size.height / 3.7 : 0.0,
                 child: WaveWidget(
@@ -63,45 +63,43 @@ class _RegisterState extends State<Register> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Column(children: <Widget>[
-                      Text(
-                        'SMART REEF',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w900,
-                        ),
+                    const Text(
+                      'SMART REEF',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50.0,
+                        fontWeight: FontWeight.w900,
                       ),
-                      Text(
-                        'Create an account!',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.w900,
-                        ),
+                    ),
+                    const Text(
+                      'Create an account!',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.w900,
                       ),
-                    ]),
+                    ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Form(
                   key: _formKey,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        SizedBox(height: 20.0),
+                        const SizedBox(height: 20.0),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.email_outlined,
                               color: Colors.blue,
                             ),
                             hintText: 'Email',
-                            hintStyle: TextStyle(color: Colors.blue),
+                            hintStyle: const TextStyle(color: Colors.blue),
                           ),
-                          style: TextStyle(color: Colors.blue),
+                          style: const TextStyle(color: Colors.blue),
                           validator: (val) =>
                               val.isEmpty ? 'Enter an email' : null,
                           keyboardType: TextInputType.emailAddress,
@@ -109,40 +107,48 @@ class _RegisterState extends State<Register> {
                             setState(() => email = val);
                           },
                         ),
-                        SizedBox(height: 20.0),
+                        const SizedBox(height: 20.0),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
                             prefixIcon: Icon(
                               Icons.lock_outline,
-                              color: Colors.blue,
+                              color: Theme.of(context).accentColor,
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () {},
                               child: Icon(
                                 Icons.visibility_off,
-                                color: Colors.blue,
+                                color: Theme.of(context).accentColor,
                               ),
                             ),
                             hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.blue),
+                            hintStyle:
+                                TextStyle(color: Theme.of(context).accentColor),
                           ),
+                          obscureText: true,
+                          keyboardType: TextInputType.visiblePassword,
+                          validator: (val) => val.length < 6
+                              ? 'Enter a password 6+ chars long'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => password = val);
+                          },
                         ),
-                        SizedBox(height: 56.0),
+                        const SizedBox(height: 56.0),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 50, vertical: 16),
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            child: Text('Register'),
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 setState(() => loading = true);
 
-                                dynamic result = await _auth
+                                final dynamic result = await _auth
                                     .registerUserWithEmailAndPassword(
                                         email, password);
                                 if (result == null) {
@@ -153,28 +159,30 @@ class _RegisterState extends State<Register> {
                                 }
                               }
                             },
+                            child: const Text('Register'),
                           ),
                         ),
-                        SizedBox(height: 20.0),
+                        const SizedBox(height: 20.0),
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.blue, width: 2),
-                              padding: EdgeInsets.symmetric(
+                              side: const BorderSide(
+                                  color: Colors.blue, width: 2),
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 50, vertical: 16),
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            child: Text('Sign In'),
                             onPressed: () {
                               widget.toggleView();
                             },
+                            child: const Text('Sign In'),
                           ),
                         ),
                         Text(
                           error,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.red,
                             fontSize: 14.0,
                           ),

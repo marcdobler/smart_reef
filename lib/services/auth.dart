@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:smart_reef/models/userProfile.dart';
-import 'package:smart_reef/services/database.dart';
+import '../models/user_profile.dart';
+import 'database_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -16,13 +16,19 @@ class AuthService {
     return _auth.authStateChanges().map(_userFromUserCredential);
   }
 
+  Future getCurrentUID() async {
+    final User user = _auth.currentUser;
+    return _userFromUserCredential(user);
+  }
+
   // Sign in anonymously
   Future signInAnonymously() async {
     try {
-      UserCredential userCredential = await _auth.signInAnonymously();
-      User user = userCredential.user;
+      final UserCredential userCredential = await _auth.signInAnonymously();
+      final User user = userCredential.user;
       return _userFromUserCredential(user);
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
       return null;
     }
@@ -31,17 +37,20 @@ class AuthService {
   // Sign in email password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      User user = userCredential.user;
+      final UserCredential userCredential = await _auth
+          .signInWithEmailAndPassword(email: email, password: password);
+      final User user = userCredential.user;
       return _userFromUserCredential(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        // ignore: avoid_print
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
+        // ignore: avoid_print
         print('Wrong password provided for that user.');
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
       return null;
     }
@@ -52,22 +61,25 @@ class AuthService {
   // With email and password
   Future registerUserWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth
+      final UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
-      User user = userCredential.user;
+      final User user = userCredential.user;
 
-      // Create a new document for the user with the uid
+      // Create a new document for the user with the uid just to try
       await DatabaseService(uid: user.uid)
           .updateUserData(30, 30, 30, 'Pico Reef', 'SPS');
 
       return _userFromUserCredential(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        // ignore: avoid_print
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
+        // ignore: avoid_print
         print('The account already exists for that email.');
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
       return null;
     }
@@ -83,12 +95,13 @@ class AuthService {
         await googleUser.authentication;
 
     // Create a new credential
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+    final OAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
     // Once signed in, return the UserCredential
+    // ignore: unnecessary_await_in_return
     return await _auth.signInWithCredential(credential);
   }
 
@@ -97,6 +110,7 @@ class AuthService {
     try {
       return await _auth.signOut();
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
       return null;
     }

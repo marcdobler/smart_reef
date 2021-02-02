@@ -7,7 +7,7 @@ class GeneralSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Account Screen"),
+          title: const Text("Account Screen"),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -17,16 +17,16 @@ class GeneralSettings extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                child: Text(
-                  "Back to Login",
-                  style: TextStyle(color: Colors.white),
-                ),
                 onPressed: () {
                   Navigator.popUntil(
                     context,
                     (route) => route.isFirst,
                   );
                 },
+                child: const Text(
+                  "Back to Login",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             )
           ],

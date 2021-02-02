@@ -1,10 +1,10 @@
 class Tank {
+  final String id;
   final String name;
   final String type;
-  final String uid;
   final int height;
-  final int lenght;
+  final int length;
   final int width;
 
-  Tank({this.name, this.type, this.uid, this.height, this.lenght, this.width});
+  Tank({this.id, this.name, this.type, this.height, this.length, this.width});
 }

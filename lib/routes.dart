@@ -1,19 +1,19 @@
-import 'package:smart_reef/screens/home/home.dart';
-import 'package:smart_reef/screens/user/account.dart';
-import 'package:smart_reef/screens/search/coral.dart';
-import 'package:smart_reef/screens/user/general_settings.dart';
-import 'package:smart_reef/screens/splashscreen.dart';
-import 'package:smart_reef/screens/tank.dart';
-import 'package:smart_reef/screens/notifications.dart';
+import 'features/camera/camera.dart';
+import 'features/user/account.dart';
+import 'features/user/general_settings.dart';
+import 'screens/home/home.dart';
+import 'screens/notifications.dart';
+import 'screens/splashscreen.dart';
+import 'screens/tank.dart';
 
 getRoutes() {
   return {
     Account.route: (context) => Account(),
-    Coral.route: (context) => Coral(data: null),
+    Camera().route: (context) => Camera(),
     Home.route: (context) => Home(),
     GeneralSettings.route: (context) => GeneralSettings(),
     Splashscreen.route: (context) => Splashscreen(),
-    Tank.route: (context) => Tank(index: null),
+    Tank.route: (context) => const Tank(index: null),
     Notifications.route: (context) => Notifications(),
   };
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_reef/models/tank.dart';
-import 'package:smart_reef/screens/home/tank_tile.dart';
+import '../../models/tank.dart';
+import 'tank_tile.dart';
 
 class TankList extends StatefulWidget {
   @override
@@ -9,18 +9,26 @@ class TankList extends StatefulWidget {
 }
 
 class _TankListState extends State<TankList> {
+  Future<void> refreshList() async {
+    await Future.delayed(const Duration(seconds: 2));
+  }
+
   @override
   Widget build(BuildContext context) {
     final tanks = Provider.of<List<Tank>>(context);
 
-    return ListView.builder(
-      // The getter 'length' was called on null.
-      // Receiver: null
-      // Tried calling: length
-      itemCount: tanks.length ?? 0,
-      itemBuilder: (context, index) {
-        return TankTile(tank: tanks[index]);
-      },
+    return Container(
+      height: MediaQuery.of(context).size.height / 3,
+      child: RefreshIndicator(
+        onRefresh: refreshList,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: tanks.length ?? 0,
+          itemBuilder: (context, index) {
+            return TankTile(tank: tanks[index]);
+          },
+        ),
+      ),
     );
   }
 }
